@@ -12,10 +12,7 @@ paper for more details. Please contact Shashi Narayan
 
 If you use our code, please cite the following paper. 
 
-###### Hybrid Simplification using Deep Semantics and Machine
-  Translation, Shashi Narayan and Claire Gardent, The 52nd Annual
-  meeting of the Association for Computational Linguistics (ACL),
-  Baltimore, June. https://aclweb.org/anthology/P/P14/P14-1041.pdf
+##### Hybrid Simplification using Deep Semantics and Machine Translation, Shashi Narayan and Claire Gardent, The 52nd Annual meeting of the Association for Computational Linguistics (ACL), Baltimore, June. https://aclweb.org/anthology/P/P14/P14-1041.pdf.
 
 > We present a hybrid approach to sentence simplification which
 > combines deep semantics and monolingual machine translation to
