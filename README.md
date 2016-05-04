@@ -1,1 +1,1 @@
-# Sentence-Simplification-ACL14
+# Hybrid Simplification using Deep Semantics and Machine Translation
