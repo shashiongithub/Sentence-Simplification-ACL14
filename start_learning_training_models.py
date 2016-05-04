@@ -15,6 +15,7 @@ import sys
 import datetime
 
 sys.path.append("./source")
+MOSESTOOLDIR=""
 import functions_configuration_file
 import functions_model_files
 from saxparser_xml_stanfordtokenized_boxergraph import SAXPARSER_XML_StanfordTokenized_BoxerGraph
@@ -221,13 +222,13 @@ if __name__=="__main__":
     #     # Cleaning the moses training file
     #     timestamp = datetime.datetime.now().strftime("%A%d-%B%Y-%I%M%p")
     #     print timestamp+", Step "+str(state)+".2: Cleaning the moses training file ..."
-    #     command = "/home/ankh/Tools/moses/scripts/training/clean-corpus-n.perl "+D2S_Config_data["TRANSFORMATION-MODEL-DIR"]+"/D2S-SMT source target "+moses_corpus_dir+"/D2S-SMT-clean 1 95"
+    #     command = MOSESTOOLDIR+"/scripts/training/clean-corpus-n.perl "+D2S_Config_data["TRANSFORMATION-MODEL-DIR"]+"/D2S-SMT source target "+moses_corpus_dir+"/D2S-SMT-clean 1 95"
     #     os.system(command)
 
     #     # Running moses training 
     #     timestamp = datetime.datetime.now().strftime("%A%d-%B%Y-%I%M%p")
     #     print timestamp+", Step "+str(state)+".3: Running the moses training ..."
-    #     command = ("/home/ankh/Tools/moses/scripts/training/train-model.perl -mgiza -mgiza-cpus 3 -cores 3 -parallel -sort-buffer-size 3G -sort-batch-size 253 -sort-compress gzip -sort-parallel 3 "+
+    #     command = (MOSESTOOLDIR+"/ools/moses/scripts/training/train-model.perl -mgiza -mgiza-cpus 3 -cores 3 -parallel -sort-buffer-size 3G -sort-batch-size 253 -sort-compress gzip -sort-parallel 3 "+
     #                "-root-dir "+moses_dir+" -corpus "+moses_corpus_dir+"/D2S-SMT-clean -f source -e target -external-bin-dir /home/ankh/Tools/mgizapp/bin "+
     #                "-lm "+D2S_Config_data["LANGUAGE-MODEL"])
     #     os.system(command)
