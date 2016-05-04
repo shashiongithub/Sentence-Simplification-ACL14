@@ -4,10 +4,12 @@ Sentence simplification maps a sentence to a simpler, more readable
 one approximating its content. In practice, simplification is often
 modeled using four main operations: splitting a complex sentence into
 several simpler sentences; dropping and reordering phrases or
-constituents (); substituting words/phrases with simpler ones.
+constituents; substituting words/phrases with simpler ones.
 
-This is implementation from our ACL'14 paper. Please go through our
-paper for more details. Please contact Shashi Narayan
+This is implementation from our ACL'14 paper. We have modified our
+code to let you choose what simplification operations you want to
+apply to your complex sentences. Please go through our paper for more
+details. Please contact Shashi Narayan
 (shashi.narayan(at){ed.ac.uk,gmail.com}) for any query.
 
 If you use our code, please cite the following paper. 
@@ -27,15 +29,24 @@ If you use our code, please cite the following paper.
 
 ### Current Status
 
+* Transformation model is retested for both training and testing.
 
+* ToDo: Test the moses model.  
 
+* ToDo: Test if we successfully incorporated improvements from our
+ arXiv paper. http://arxiv.org/pdf/1507.08452v1.pdf
 
+** OOD words at the border should be dropped and don't split at "TO".
+
+* ToDo: Change to online version of sentence simplification.
+
+* ToDo: Upload small set of training and test sets. 
 
 ### Requirements
 
-* Boxer 1.00: 
+* Boxer 1.00:  http://svn.ask.it.usyd.edu.au/trac/candc/wiki/boxer
 * Moses: http://www.statmt.org/moses/?n=Development.GetStarted
 * Mgiza++:  http://www.statmt.org/moses/?n=Moses.ExternalTools#ntoc3
-* NLTK toolkit 
+* NLTK toolkit: http://www.nltk.org/
 * Python 2.7
-* Stanford Toolkit
+* Stanford Toolkit: http://nlp.stanford.edu/software/tagger.html
