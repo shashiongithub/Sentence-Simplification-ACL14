@@ -16,9 +16,9 @@ import datetime
 
 sys.path.append("./source")
 import functions_configuration_file
-# import functions_model_files
+import functions_model_files
 from saxparser_xml_stanfordtokenized_boxergraph import SAXPARSER_XML_StanfordTokenized_BoxerGraph
-# from saxparser_xml_stanfordtokenized_boxergraph_traininggraph import SAXPARSER_XML_StanfordTokenized_BoxerGraph_TrainingGraph
+from saxparser_xml_stanfordtokenized_boxergraph_traininggraph import SAXPARSER_XML_StanfordTokenized_BoxerGraph_TrainingGraph
 
 if __name__=="__main__":
     # Command line arguments ##############
@@ -130,60 +130,60 @@ if __name__=="__main__":
         timestamp = datetime.datetime.now().strftime("%A%d-%B%Y-%I%M%p")
         print timestamp+", Finished building training graph (Step-"+str(state)+")\n"
 
-    # # Start state: 2
-    # state = 2
-    # if (int(args_dict['start_state']) <= state) and (state <= int(args_dict['end_state'])):
-    #     timestamp = datetime.datetime.now().strftime("%A%d-%B%Y-%I%M%p")
-    #     print timestamp+", Starting learning transformation models (Step-"+str(state)+") ..."
+    # Start state: 2
+    state = 2
+    if (int(args_dict['start_state']) <= state) and (state <= int(args_dict['end_state'])):
+        timestamp = datetime.datetime.now().strftime("%A%d-%B%Y-%I%M%p")
+        print timestamp+", Starting learning transformation models (Step-"+str(state)+") ..."
         
-    #     if "TRAIN-TRAINING-GRAPH" not in D2S_Config_data:
-    #         print "The training graph file (xml, stanford tokenized, boxer graph and training graph) is not available."
-    #         print "Please enter the configuration file or start with the State 1."
-    #         timestamp = datetime.datetime.now().strftime("%A%d-%B%Y-%I%M%p")
-    #         print timestamp+", No transformation models learned (Step-"+str(state)+")\n"
-    #         exit(0)
+        if "TRAIN-TRAINING-GRAPH" not in D2S_Config_data:
+            print "The training graph file (xml, stanford tokenized, boxer graph and training graph) is not available."
+            print "Please enter the configuration file or start with the State 1."
+            timestamp = datetime.datetime.now().strftime("%A%d-%B%Y-%I%M%p")
+            print timestamp+", No transformation models learned (Step-"+str(state)+")\n"
+            exit(0)
             
-    #     # @ Defining data structure @ 
-    #     # Stores various sentence pairs (complex, simple) for SMT.
-    #     smt_sentence_pairs = {} 
-    #     # probability tables - store all probabilities
-    #     probability_tables = {}
-    #     # count tables - store counts in next iteration
-    #     count_tables = {}
-    #     # @ @
+        # @ Defining data structure @ 
+        # Stores various sentence pairs (complex, simple) for SMT.
+        smt_sentence_pairs = {} 
+        # probability tables - store all probabilities
+        probability_tables = {}
+        # count tables - store counts in next iteration
+        count_tables = {}
+        # @ @
         
-    #     print "Creating the em-training XML file (stanford tokenized, boxer graph and training graph) handler ..."
-    #     em_training_xml_handler = SAXPARSER_XML_StanfordTokenized_BoxerGraph_TrainingGraph(D2S_Config_data["TRAIN-TRAINING-GRAPH"], D2S_Config_data["NUM-EM-ITERATION"], 
-    #                                                                                        smt_sentence_pairs, probability_tables, count_tables,  D2S_Config_data["METHOD-FEATURE-EXTRACT"])
+        print "Creating the em-training XML file (stanford tokenized, boxer graph and training graph) handler ..."
+        em_training_xml_handler = SAXPARSER_XML_StanfordTokenized_BoxerGraph_TrainingGraph(D2S_Config_data["TRAIN-TRAINING-GRAPH"], D2S_Config_data["NUM-EM-ITERATION"], 
+                                                                                           smt_sentence_pairs, probability_tables, count_tables,  D2S_Config_data["METHOD-FEATURE-EXTRACT"])
 
-    #     print "Start Expectation Maximization (Inside-Outside) algorithm ..."
-    #     timestamp = datetime.datetime.now().strftime("%A%d-%B%Y-%I%M%p")
-    #     print timestamp+", Step "+str(state)+".1: Initialization of probability tables and populating smt_sentence_pairs ..."
-    #     em_training_xml_handler.parse_to_initialize_probabilitytable()
-    #     # print probability_tables
+        print "Start Expectation Maximization (Inside-Outside) algorithm ..."
+        timestamp = datetime.datetime.now().strftime("%A%d-%B%Y-%I%M%p")
+        print timestamp+", Step "+str(state)+".1: Initialization of probability tables and populating smt_sentence_pairs ..."
+        em_training_xml_handler.parse_to_initialize_probabilitytable()
+        # print probability_tables
 
-    #     timestamp = datetime.datetime.now().strftime("%A%d-%B%Y-%I%M%p")
-    #     print timestamp+", Step "+str(state)+".2: Start iterating for EM Inside-Outside probabilities ..."
-    #     em_training_xml_handler.parse_to_iterate_probabilitytable()
-    #     # print probability_tables
+        timestamp = datetime.datetime.now().strftime("%A%d-%B%Y-%I%M%p")
+        print timestamp+", Step "+str(state)+".2: Start iterating for EM Inside-Outside probabilities ..."
+        em_training_xml_handler.parse_to_iterate_probabilitytable()
+        # print probability_tables
 
-    #     # Start writing model files
-    #     timestamp = datetime.datetime.now().strftime("%A%d-%B%Y-%I%M%p")
-    #     print timestamp+", Step "+str(state)+".3: Start writing model files ..."
-    #     # Creating the output directory to store training models
-    #     model_dir = args_dict['output_dir']+"/TRANSFORMATION-MODEL-DIR"
-    #     timestamp =  datetime.datetime.now().strftime("%A%d-%B%Y-%I%M%p")
-    #     print timestamp+", Creating the output model directory: "+model_dir 
-    #     try:
-    #         os.mkdir(model_dir)
-    #     except OSError:
-    #         print  model_dir + " directory already exists."
-    #     # Wriing model files
-    #     functions_model_files.write_model_files(model_dir, probability_tables, smt_sentence_pairs)
+        # Start writing model files
+        timestamp = datetime.datetime.now().strftime("%A%d-%B%Y-%I%M%p")
+        print timestamp+", Step "+str(state)+".3: Start writing model files ..."
+        # Creating the output directory to store training models
+        model_dir = args_dict['output_dir']+"/TRANSFORMATION-MODEL-DIR"
+        timestamp =  datetime.datetime.now().strftime("%A%d-%B%Y-%I%M%p")
+        print timestamp+", Creating the output model directory: "+model_dir 
+        try:
+            os.mkdir(model_dir)
+        except OSError:
+            print  model_dir + " directory already exists."
+        # Wriing model files
+        functions_model_files.write_model_files(model_dir, probability_tables, smt_sentence_pairs)
 
-    #     D2S_Config_data["TRANSFORMATION-MODEL-DIR"] = model_dir
-    #     timestamp = datetime.datetime.now().strftime("%A%d-%B%Y-%I%M%p")
-    #     print timestamp+", Finished learning transformation models (Step-"+str(state)+")\n"
+        D2S_Config_data["TRANSFORMATION-MODEL-DIR"] = model_dir
+        timestamp = datetime.datetime.now().strftime("%A%d-%B%Y-%I%M%p")
+        print timestamp+", Finished learning transformation models (Step-"+str(state)+")\n"
 
     # # Start state: 3
     # state = 3
