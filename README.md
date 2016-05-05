@@ -39,7 +39,9 @@ If you use our code, please cite the following paper.
 * ToDo: Test if we successfully incorporated improvements from our
  arXiv paper. http://arxiv.org/pdf/1507.08452v1.pdf
 
-      * OOD words at the border should be dropped and don't split at "TO".
+      * OOD words at the border should be dropped.
+      * Don't split at "TO".
+      * Full stop at the end of the sentence. 
 
 * ToDo: Change to online version of sentence simplification.
 
