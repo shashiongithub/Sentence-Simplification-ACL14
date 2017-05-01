@@ -1,12 +1,10 @@
 #!/usr/bin/env python
 #===================================================================================
 #title           : start_simplifying_complex_sentence.py                           =
-#description     : This will apply simplification models to simplify sentences.    =
+#description     : Testing                                                         =
 #author          : Shashi Narayan, shashi.narayan(at){ed.ac.uk,loria.fr,gmail.com})=                                    
 #date            : Created in 2014, Later revised in April 2016.                   =
 #version         : 0.1                                                             =
-#usage           : python2.7 start_learning_training_models.py -help               =
-#notes           : Look at README for requirements.                                =
 #===================================================================================
 
 import os
@@ -16,8 +14,6 @@ import datetime
 from nltk.metrics.distance import edit_distance
 
 sys.path.append("./source")
-MOSESTOOLDIR=""
-
 import functions_configuration_file
 import functions_model_files
 import functions_prepare_elementtree_dot
@@ -25,13 +21,17 @@ from saxparser_xml_stanfordtokenized_boxergraph import SAXPARSER_XML_StanfordTok
 from explore_decoder_graph_greedy import Explore_Decoder_Graph_Greedy
 from explore_decoder_graph_explorative import Explore_Decoder_Graph_Explorative
 
-def get_greedy_decoder_graph(test_boxerdata_dict, test_sentids, TRANSFORMATION_MODEL, MAX_SPLIT_SIZE, RESTRICTED_DROP_RELATION, ALLOWED_DROP_MODIFIER, probability_tables, METHOD_FEATURE_EXTRACT):
+MOSESDIR = "~/tools/mosesdecoder"
+
+def get_greedy_decoder_graph(test_boxerdata_dict, test_sentids, TRANSFORMATION_MODEL, MAX_SPLIT_SIZE, RESTRICTED_DROP_RELATION, ALLOWED_DROP_MODIFIER, 
+                             probability_tables, METHOD_FEATURE_EXTRACT):
     mapper_transformation = {}
     moses_input = {}
     transformation_complex_count = 0
 
     # Transformation decoder
-    decoder_graph_explorer = Explore_Decoder_Graph_Greedy(TRANSFORMATION_MODEL, MAX_SPLIT_SIZE, RESTRICTED_DROP_RELATION, ALLOWED_DROP_MODIFIER, probability_tables, METHOD_FEATURE_EXTRACT)
+    decoder_graph_explorer = Explore_Decoder_Graph_Greedy(TRANSFORMATION_MODEL, MAX_SPLIT_SIZE, RESTRICTED_DROP_RELATION, ALLOWED_DROP_MODIFIER, 
+                                                          probability_tables, METHOD_FEATURE_EXTRACT)
     for sentid in test_sentids:
         print sentid
         sent_data = test_boxerdata_dict[str(sentid)]
@@ -57,13 +57,15 @@ def get_greedy_decoder_graph(test_boxerdata_dict, test_sentids, TRANSFORMATION_M
             transformation_complex_count += 1
     return mapper_transformation, moses_input
 
-def get_explorative_decoder_graph(test_boxerdata_dict, test_sentids, TRANSFORMATION_MODEL, MAX_SPLIT_SIZE, RESTRICTED_DROP_RELATION, ALLOWED_DROP_MODIFIER, probability_tables, METHOD_FEATURE_EXTRACT):
+def get_explorative_decoder_graph(test_boxerdata_dict, test_sentids, TRANSFORMATION_MODEL, MAX_SPLIT_SIZE, RESTRICTED_DROP_RELATION, ALLOWED_DROP_MODIFIER, 
+                                  probability_tables, METHOD_FEATURE_EXTRACT):
     mapper_transformation = {}
     moses_input = {}
     transformation_complex_count = 0
     
     # Transformation decoder
-    decoder_graph_explorer = Explore_Decoder_Graph_Explorative(TRANSFORMATION_MODEL, MAX_SPLIT_SIZE, RESTRICTED_DROP_RELATION, ALLOWED_DROP_MODIFIER, probability_tables, METHOD_FEATURE_EXTRACT)
+    decoder_graph_explorer = Explore_Decoder_Graph_Explorative(TRANSFORMATION_MODEL, MAX_SPLIT_SIZE, RESTRICTED_DROP_RELATION, ALLOWED_DROP_MODIFIER, 
+                                                               probability_tables, METHOD_FEATURE_EXTRACT)
     for sentid in test_sentids:
         print sentid
         sent_data = test_boxerdata_dict[str(sentid)]
@@ -100,9 +102,9 @@ def get_explorative_decoder_graph(test_boxerdata_dict, test_sentids, TRANSFORMAT
 if __name__ == "__main__":
     argparser = argparse.ArgumentParser(prog='python simplify_complex_sentence.py', description=('Start simplifying complex sentences.'))
 
-    # Optional [default value: /disk/scratch/Sentence-Simplification/Zhu-2010/TestData/complex.tokenized.boxer-graph.xml]
+    # Optional [default value: /home/ankh/Data/Simplification/Test-Data/complex.tokenized.boxer-graph.xml]
     argparser.add_argument('--test-boxer-graph', help='The test corpus file (xml, stanford-tokenized, boxer-graph)', metavar=('Test_Boxer_Graph'),
-                           default='/disk/scratch/Sentence-Simplification/Zhu-2010/TestData/complex.tokenized.boxer-graph.xml')
+                           default='/home/ankh/Data/Simplification/Test-Data/complex.tokenized.boxer-graph.xml')
 
     # Optional [default value: 10]
     argparser.add_argument('--nbest-distinct', help='N Best Distinct produced from Moses', metavar=('N_Best_Distinct'), default='10')
@@ -195,90 +197,90 @@ if __name__ == "__main__":
         d2s_complex_file.write((" ".join(simple_sentence)).encode('utf-8')+"\n")
     d2s_complex_file.close()
 
-    # # STEP:6 Running Moses
-    # timestamp =  datetime.datetime.now().strftime("%A%d-%B%Y-%I%M%p")
-    # print "\n"+timestamp+", Applying the moses translation model ..."
-    # command = (MOSESTOOLDIR+"/bin/moses -f "+D2S_Config_data["MOSES-COMPLEX-SIMPLE-DIR"]+"/model/moses.ini "+
-    #            "-n-best-list "+test_output_directory+"/transformation-output.moses-"+args_dict['nbest_distinct']+"best-distinct.simple"+" "+args_dict['nbest_distinct']+" distinct "+
-    #            "-input-file "+test_output_directory+"/transformation-output.moses-input")
-    # os.system(command)
+    # STEP:6 Running Moses
+    timestamp =  datetime.datetime.now().strftime("%A%d-%B%Y-%I%M%p")
+    print "\n"+timestamp+", Applying the moses translation model ..."
+    command = (MOSESDIR+"/bin/moses -f "+D2S_Config_data["MOSES-COMPLEX-SIMPLE-DIR"]+"/model/moses.ini "+
+               "-n-best-list "+test_output_directory+"/transformation-output.moses-"+args_dict['nbest_distinct']+"best-distinct.simple"+" "+args_dict['nbest_distinct']+" distinct "+
+               "-input-file "+test_output_directory+"/transformation-output.moses-input")
+    os.system(command)
 
-    # # Reading the moses output file
-    # print "Parsing the moses output file: "+test_output_directory+"/transformation-output.moses-"+args_dict['nbest_distinct']+"best-distinct.simple"
-    # moses_output = {}
-    # finput = open(test_output_directory+"/transformation-output.moses-"+args_dict['nbest_distinct']+"best-distinct.simple", "r")
-    # datalines = finput.readlines()
-    # for line in datalines:
-    #     parts = line.split(" ||| ")
-    #     sentid = int(parts[0].strip())
-    #     sent = parts[1].strip()
-    #     if sentid not in moses_output:
-    #         moses_output[sentid] = [sent]
-    #     else:
-    #         moses_output[sentid].append(sent)
-    # finput.close()
+    # Reading the moses output file
+    print "Parsing the moses output file: "+test_output_directory+"/transformation-output.moses-"+args_dict['nbest_distinct']+"best-distinct.simple"
+    moses_output = {}
+    finput = open(test_output_directory+"/transformation-output.moses-"+args_dict['nbest_distinct']+"best-distinct.simple", "r")
+    datalines = finput.readlines()
+    for line in datalines:
+        parts = line.split(" ||| ")
+        sentid = int(parts[0].strip())
+        sent = parts[1].strip()
+        if sentid not in moses_output:
+            moses_output[sentid] = [sent]
+        else:
+            moses_output[sentid].append(sent)
+    finput.close()
 
-    # # Storing the best moses output
-    # timestamp =  datetime.datetime.now().strftime("%A%d-%B%Y-%I%M%p")
-    # print "\n"+timestamp+", Best output of moses ..."
-    # final_output_filename = test_output_directory+"/transformation-output.moses-"+args_dict['nbest_distinct']+"best-distinct.simple.best"
-    # print "Writing to the file: "+final_output_filename
-    # final_output_file = open(final_output_filename, "w")
-    # for sentid in test_sentids:
-    #     simple_sentence = []
-    #     for moses_input_id in mapper_transformation[sentid]:
-    #         moses_simple_output_best = moses_output[moses_input_id][0]
-    #         simple_sentence.append(moses_simple_output_best)
-    #     final_output_file.write(" ".join(simple_sentence)+"\n") 
-    # final_output_file.close()
+    # Storing the best moses output
+    timestamp =  datetime.datetime.now().strftime("%A%d-%B%Y-%I%M%p")
+    print "\n"+timestamp+", Best output of moses ..."
+    final_output_filename = test_output_directory+"/transformation-output.moses-"+args_dict['nbest_distinct']+"best-distinct.simple.best"
+    print "Writing to the file: "+final_output_filename
+    final_output_file = open(final_output_filename, "w")
+    for sentid in test_sentids:
+        simple_sentence = []
+        for moses_input_id in mapper_transformation[sentid]:
+            moses_simple_output_best = moses_output[moses_input_id][0]
+            simple_sentence.append(moses_simple_output_best)
+        final_output_file.write(" ".join(simple_sentence)+"\n") 
+    final_output_file.close()
 
-    # # Running posthoc reranking
-    # timestamp =  datetime.datetime.now().strftime("%A%d-%B%Y-%I%M%p")
-    # print "\n"+timestamp+", Running the post-hoc reranking ..."
-    # posthoc_reranked = {}
-    # for sentid in test_sentids:
-    #     for moses_input_id in mapper_transformation[sentid]:
-    #         moses_complex_input = moses_input[moses_input_id]
-    #         moses_simple_outputs = moses_output[moses_input_id]
+    # Running posthoc reranking
+    timestamp =  datetime.datetime.now().strftime("%A%d-%B%Y-%I%M%p")
+    print "\n"+timestamp+", Running the post-hoc reranking ..."
+    posthoc_reranked = {}
+    for sentid in test_sentids:
+        for moses_input_id in mapper_transformation[sentid]:
+            moses_complex_input = moses_input[moses_input_id]
+            moses_simple_outputs = moses_output[moses_input_id]
 
-    #         posthoc_reranked[moses_input_id] = []
-    #         for simple_output in moses_simple_outputs:
-    #             edit_dist = edit_distance(simple_output, moses_complex_input)
-    #             posthoc_reranked[moses_input_id].append((edit_dist, simple_output))
+            posthoc_reranked[moses_input_id] = []
+            for simple_output in moses_simple_outputs:
+                edit_dist = edit_distance(simple_output, moses_complex_input)
+                posthoc_reranked[moses_input_id].append((edit_dist, simple_output))
 
-    #         # More different are ranked at top
-    #         posthoc_reranked[moses_input_id].sort(reverse=True)
+            # More different are ranked at top
+            posthoc_reranked[moses_input_id].sort(reverse=True)
             
-    # # Writing post-hoc reranked output
-    # final_output_filename = test_output_directory+"/transformation-output.moses-"+args_dict['nbest_distinct']+"best-distinct.post-hoc-reranking.simple"
-    # print "Writing to the file: "+final_output_filename
-    # final_output_file = open(final_output_filename, "w")
-    # for sentid in test_sentids:
-    #     for moses_input_id in mapper_transformation[sentid]:
-    #         for item in posthoc_reranked[moses_input_id]:
-    #             final_output_file.write(str(moses_input_id)+"\t"+str(item[0])+"\t"+item[1]+"\n")
-    #         final_output_file.write("\n")
-    # final_output_file.close()
+    # Writing post-hoc reranked output
+    final_output_filename = test_output_directory+"/transformation-output.moses-"+args_dict['nbest_distinct']+"best-distinct.post-hoc-reranking.simple"
+    print "Writing to the file: "+final_output_filename
+    final_output_file = open(final_output_filename, "w")
+    for sentid in test_sentids:
+        for moses_input_id in mapper_transformation[sentid]:
+            for item in posthoc_reranked[moses_input_id]:
+                final_output_file.write(str(moses_input_id)+"\t"+str(item[0])+"\t"+item[1]+"\n")
+            final_output_file.write("\n")
+    final_output_file.close()
 
-    # # Writing post-hoc reranked best output
-    # final_output_filename = test_output_directory+"/transformation-output.moses-"+args_dict['nbest_distinct']+"best-distinct.post-hoc-reranking.simple.best"
-    # print "Writing to the file: "+final_output_filename
-    # final_output_file = open(final_output_filename, "w")
-    # for sentid in test_sentids:
-    #     simple_sentence = []
-    #     for moses_input_id in mapper_transformation[sentid]:
-    #         simple_output_best = posthoc_reranked[moses_input_id][0][1]
-    #         simple_sentence.append(simple_output_best)
-    #     final_output_file.write(" ".join(simple_sentence)+"\n") 
-    # final_output_file.close()
+    # Writing post-hoc reranked best output
+    final_output_filename = test_output_directory+"/transformation-output.moses-"+args_dict['nbest_distinct']+"best-distinct.post-hoc-reranking.simple.best"
+    print "Writing to the file: "+final_output_filename
+    final_output_file = open(final_output_filename, "w")
+    for sentid in test_sentids:
+        simple_sentence = []
+        for moses_input_id in mapper_transformation[sentid]:
+            simple_output_best = posthoc_reranked[moses_input_id][0][1]
+            simple_sentence.append(simple_output_best)
+        final_output_file.write(" ".join(simple_sentence)+"\n") 
+    final_output_file.close()
 
 
-    # # test_boxerdata_dict = {}
-    # # test_sentids = []    
+    # test_boxerdata_dict = {}
+    # test_sentids = []    
 
-    # # mapper_transformation = {}
-    # # moses_input = {}
+    # mapper_transformation = {}
+    # moses_input = {}
 
-    # # moses_output = {}
+    # moses_output = {}
     
-    # # posthoc_reranked = {}
+    # posthoc_reranked = {}
