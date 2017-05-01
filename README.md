@@ -97,52 +97,54 @@ If you use our code, please cite the following paper.
 * Training goes through three states: 1) Building Boxer training
   graphs, 2) EM training and 3) SMT training
 
-; python start_learning_training_models.py --help
-: usage: python learn_training_models.py [-h] [--start-state Start_State]
-:                                       [--end-state End_State]
-:                                       [--transformation TRANSFORMATION_MODEL]
-:                                       [--max-split MAX_SPLIT_SIZE]
-:                                       [--restricted-drop-rel RESTRICTED_DROP_REL]
-:                                       [--allowed-drop-mod ALLOWED_DROP_MOD]
-:                                       [--method-training-graph Method_Training_Graph]
-:                                       [--method-feature-extract Method_Feature_Extract]
-:                                       [--train-boxer-graph Train_Boxer_Graph]
-:                                       [--num-em NUM_EM_ITERATION]
-:                                       [--lang-model Lang_Model]
-:                                       [--d2s-config D2S_Config] --output-dir
-:                                       Output_Directory
+```python start_learning_training_models.py --help
+ 
+usage: python learn_training_models.py [-h] [--start-state Start_State]
+                                       [--end-state End_State]
+                                       [--transformation TRANSFORMATION_MODEL]
+                                       [--max-split MAX_SPLIT_SIZE]
+                                       [--restricted-drop-rel RESTRICTED_DROP_REL]
+                                       [--allowed-drop-mod ALLOWED_DROP_MOD]
+                                       [--method-training-graph Method_Training_Graph]
+                                       [--method-feature-extract Method_Feature_Extract]
+                                       [--train-boxer-graph Train_Boxer_Graph]
+                                       [--num-em NUM_EM_ITERATION]
+                                       [--lang-model Lang_Model]
+                                       [--d2s-config D2S_Config] --output-dir
+                                       Output_Directory
 
 Start the training process.
 
 optional arguments:
-:  -h, --help            show this help message and exit
-:  --start-state Start_State
-::                        Start state of the training process
-:  --end-state End_State
-::                        End state of the training process
-:  --transformation TRANSFORMATION_MODEL
-::                        Transformation models learned
-:  --max-split MAX_SPLIT_SIZE
-::                        Maximum split size
-:  --restricted-drop-rel RESTRICTED_DROP_REL
-::                        Restricted drop relations
-:  --allowed-drop-mod ALLOWED_DROP_MOD
-::                        Allowed drop modifiers
-:  --method-training-graph Method_Training_Graph
-::                        Operation set for training graph file
-:  --method-feature-extract Method_Feature_Extract
-::                        Operation set for extracting features
-:  --train-boxer-graph Train_Boxer_Graph
-::                        The training corpus file (xml, stanford-tokenized,
-::                        boxer-graph)
-:  --num-em NUM_EM_ITERATION
-::                        The number of EM Algorithm iterations
-:  --lang-model Lang_Model
-::                        Language model information (in the moses format)
-:  --d2s-config D2S_Config
-::                        D2S Configuration file
-:  --output-dir Output_Directory
-::                        The output directory
+  -h, --help            show this help message and exit
+  --start-state Start_State
+                        Start state of the training process
+  --end-state End_State
+                        End state of the training process
+  --transformation TRANSFORMATION_MODEL
+                        Transformation models learned
+  --max-split MAX_SPLIT_SIZE
+                        Maximum split size
+  --restricted-drop-rel RESTRICTED_DROP_REL
+                        Restricted drop relations
+  --allowed-drop-mod ALLOWED_DROP_MOD
+                        Allowed drop modifiers
+  --method-training-graph Method_Training_Graph
+                        Operation set for training graph file
+  --method-feature-extract Method_Feature_Extract
+                        Operation set for extracting features
+  --train-boxer-graph Train_Boxer_Graph
+                        The training corpus file (xml, stanford-tokenized,
+                        boxer-graph)
+  --num-em NUM_EM_ITERATION
+                        The number of EM Algorithm iterations
+  --lang-model Lang_Model
+                        Language model information (in the moses format)
+  --d2s-config D2S_Config
+                        D2S Configuration file
+  --output-dir Output_Directory
+                        The output directory
+```
 
 * Have a look in start_learning_training_models.py for more
 information on their definitions and their default values.
@@ -152,30 +154,32 @@ information on their definitions and their default values.
 
 ### Testing
 
+```
 python start_simplifying_complex_sentence.py --help
 
 usage: python simplify_complex_sentence.py [-h]
-:                                           [--test-boxer-graph Test_Boxer_Graph]
-:                                           [--nbest-distinct N_Best_Distinct]
-:                                           [--explore-decoder Explore_Decoder]
-:                                           --d2s-config D2S_Config
-:                                           --output-dir Output_Directory
+                                           [--test-boxer-graph Test_Boxer_Graph]
+                                           [--nbest-distinct N_Best_Distinct]
+                                           [--explore-decoder Explore_Decoder]
+                                           --d2s-config D2S_Config
+                                           --output-dir Output_Directory
 
 Start simplifying complex sentences.
 
 optional arguments:
-:  -h, --help            show this help message and exit
-:  --test-boxer-graph Test_Boxer_Graph
-::                        The test corpus file (xml, stanford-tokenized, boxer-
-::                        graph)
-:  --nbest-distinct N_Best_Distinct
-::                        N Best Distinct produced from Moses
-:  --explore-decoder Explore_Decoder
-::                        Method for generating the decoder graph
-:  --d2s-config D2S_Config
-::                        D2S Configuration file
-:  --output-dir Output_Directory
-::                        The output directory
+  -h, --help            show this help message and exit
+  --test-boxer-graph Test_Boxer_Graph
+                        The test corpus file (xml, stanford-tokenized, boxer-
+                        graph)
+  --nbest-distinct N_Best_Distinct
+                        N Best Distinct produced from Moses
+  --explore-decoder Explore_Decoder
+                        Method for generating the decoder graph
+  --d2s-config D2S_Config
+                        D2S Configuration file
+  --output-dir Output_Directory
+                        The output directory
+```
 
 * test-boxer-graph: this is the output file from the test data
   preparation·
