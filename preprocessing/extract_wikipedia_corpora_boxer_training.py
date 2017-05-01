@@ -1,4 +1,13 @@
 #!/usr/bin/env python
+#===================================================================================
+#title           : extract_wikipedia_corpora_boxer_training.py                     =
+#description     : Training data preparation                                       =
+#author          : Shashi Narayan, shashi.narayan(at){ed.ac.uk,gmail.com})         =                                    
+#date            : Created in 2014, Later revised in April 2016.                   =
+#version         : 0.1                                                             =
+#===================================================================================
+
+
 import os
 import argparse
 import sys

@@ -1,4 +1,12 @@
 #!/usr/bin/env python
+#===================================================================================
+#title           : extract_wikipedia_corpora_boxer_test.py                         =
+#description     : Test data preparation                                           =
+#author          : Shashi Narayan, shashi.narayan(at){ed.ac.uk,gmail.com})         =                                    
+#date            : Created in 2014, Later revised in April 2016.                   =
+#version         : 0.1                                                             =
+#===================================================================================
+
 import os
 import argparse
 import sys
@@ -16,13 +24,15 @@ from xml.dom import minidom
 # TEST_FILE_BOXER="/home/ankh/Data/Simplification/Test-Data/complex.tokenized.boxer.xml"
 
 # # NewSella
-# TEST_FILE_MAIN="/gpfs/scratch/snarayan/Sentence-Simplification/Newsella/V0V4_V1V4_V2V4_V3V4_V0V3_V0V2_V1V3.aner.ori.test.src"
-# TEST_FILE_BOXER="/gpfs/scratch/snarayan/Sentence-Simplification/Newsella/boxer/V0V4_V1V4_V2V4_V3V4_V0V3_V0V2_V1V3.aner.ori.test.src"
+# TEST_FILE_MAIN="/gpfs/scratch/snarayan/Sentence-Simplification/Newsella/V0V4_V1V4_V2V4_V3V4_V0V3_V0V2_V1V3.aner.ori.valid.src"
+# TEST_FILE_BOXER="/gpfs/scratch/snarayan/Sentence-Simplification/Newsella/boxer/V0V4_V1V4_V2V4_V3V4_V0V3_V0V2_V1V3.aner.ori.valid.src"
 
-# Wikilarge
-# TEST_FILE_MAIN="/gpfs/scratch/snarayan/Sentence-Simplification/Newsella/V0V4_V1V4_V2V4_V3V4_V0V3_V0V2_V1V3.aner.ori.test.src"
-# TEST_FILE_BOXER="/gpfs/scratch/snarayan/Sentence-Simplification/Newsella/boxer/V0V4_V1V4_V2V4_V3V4_V0V3_V0V2_V1V3.aner.ori.test.src"
+#  Wikilarge
+# TEST_FILE_MAIN="/gpfs/scratch/snarayan/Sentence-Simplification/WikiLarge/wiki.full.aner.ori.test.src"
+# TEST_FILE_BOXER="/gpfs/scratch/snarayan/Sentence-Simplification/WikiLarge/boxer/wiki.full.aner.ori.test.src"
 
+TEST_FILE_MAIN="/gpfs/scratch/snarayan/Sentence-Simplification/WikiLarge/wiki.full.aner.ori.valid.src"
+TEST_FILE_BOXER="/gpfs/scratch/snarayan/Sentence-Simplification/WikiLarge/boxer/wiki.full.aner.ori.valid.src"
 
 
 class Boxer_XML_Handler:

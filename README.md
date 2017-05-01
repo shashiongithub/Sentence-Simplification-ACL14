@@ -30,6 +30,66 @@ If you use our code, please cite the following paper.
 > state of the art methods, our model yields significantly simpler
 > output that is both grammatical and meaning preserving.
 
+### Requirements
+
+* Boxer 1.00:  http://svn.ask.it.usyd.edu.au/trac/candc/wiki/boxer
+* Moses: http://www.statmt.org/moses/?n=Development.GetStarted
+* Mgiza++:  http://www.statmt.org/moses/?n=Moses.ExternalTools#ntoc3
+* NLTK toolkit: http://www.nltk.org/
+* Python 2.7
+* Stanford Toolkit: http://nlp.stanford.edu/software/tagger.html
+
+### Data preparation
+
+
+#### Training Data 
+
+* code: ./preprocessing/extract_wikipedia_corpora_boxer_training.py
+
+* This code prepares the training data. It takes as input tokenized
+  training (complex, simple) sentences and the boxer output (xml
+  format) of the complex sentences.
+
+* I will improve the interface of this script later. But for now you
+  have to set following parameters: (C: complex sentence and S: simple
+  sentence)
+
+** ZHUDATA_FILE_ORG = Address to the file with combined complex-simple
+  pairs. Format: C_1\nS^1_1\nS^2_1\n\nC_2\nS^1_2\nS^2_2\nS^3_2\n\n and
+  so on.
+
+** ZHUDATA_FILE_MAIN = Address to the file with all tokenized complex
+   sentences. Format: C_1\nC_2\n and so on.
+
+** ZHUDATA_FILE_SIMPLE = Address to the file with all tokenized simple
+   sentences. Format: S^1_1\nS^2_1\nS^1_2\nS^2_2\nS^3_2\n and so on.
+
+** BOXER_DATADIR: Directory address which contains the boxer output of
+   ZHUDATA_FILE_MAIN.
+
+** CHUNK_SIZE = Size of the boxer output chunks. The above scripts
+   loads boxer xml file before parsing them, it is much faster to use
+   chunks (let say of 10000) of ZHUDATA_FILE_MAIN.
+
+** boxer_main_filename = Boxer output file name pattern. For example:
+   filename."+str(lower_index)+"-"+str(lower_index+CHUNK_SIZE)
+        
+#### Test Data
+    
+* code: ./preprocessing/extract_wikipedia_corpora_boxer_test.py
+
+* This code prepares the test data. It takes as input tokenized test
+  (complex) sentences and their boxer outputs in xml format.
+
+* I will improve the interface of this script later. But for now you
+  have to set following parameters: 
+
+** TEST_FILE_MAIN: Address to the file with all tokenized complex
+   sentences. Format: C_1\nC_2\n and so on.
+
+** TEST_FILE_BOXER: Address to the boxer xml output file for
+   TEST_FILE_MAIN.
+
 ### Current Status
 
 * Transformation model is retested for both training and testing.
@@ -46,12 +106,3 @@ If you use our code, please cite the following paper.
 * ToDo: Change to online version of sentence simplification.
 
 * ToDo: Upload small set of training and test sets. 
-
-### Requirements
-
-* Boxer 1.00:  http://svn.ask.it.usyd.edu.au/trac/candc/wiki/boxer
-* Moses: http://www.statmt.org/moses/?n=Development.GetStarted
-* Mgiza++:  http://www.statmt.org/moses/?n=Moses.ExternalTools#ntoc3
-* NLTK toolkit: http://www.nltk.org/
-* Python 2.7
-* Stanford Toolkit: http://nlp.stanford.edu/software/tagger.html
