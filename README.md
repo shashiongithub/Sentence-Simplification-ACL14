@@ -97,9 +97,8 @@ If you use our code, please cite the following paper.
 * Training goes through three states: 1) Building Boxer training
   graphs, 2) EM training and 3) SMT training
 
-python start_learning_training_models.py --help
-
-usage: python learn_training_models.py [-h] [--start-state Start_State]
+; python start_learning_training_models.py --help
+: usage: python learn_training_models.py [-h] [--start-state Start_State]
 :                                       [--end-state End_State]
 :                                       [--transformation TRANSFORMATION_MODEL]
 :                                       [--max-split MAX_SPLIT_SIZE]
