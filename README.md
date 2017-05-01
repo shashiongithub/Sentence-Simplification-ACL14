@@ -54,24 +54,26 @@ If you use our code, please cite the following paper.
   have to set following parameters: (C: complex sentence and S: simple
   sentence)
 
-** ZHUDATA_FILE_ORG = Address to the file with combined complex-simple
-  pairs. Format: C_1\nS^1_1\nS^2_1\n\nC_2\nS^1_2\nS^2_2\nS^3_2\n\n and
-  so on.
+  * ZHUDATA_FILE_ORG = Address to the file with combined
+  complex-simple pairs. Format:
+  C_1\nS^1_1\nS^2_1\n\nC_2\nS^1_2\nS^2_2\nS^3_2\n\n and so on.
 
-** ZHUDATA_FILE_MAIN = Address to the file with all tokenized complex
+  * ZHUDATA_FILE_MAIN = Address to the file with all tokenized complex
    sentences. Format: C_1\nC_2\n and so on.
 
-** ZHUDATA_FILE_SIMPLE = Address to the file with all tokenized simple
-   sentences. Format: S^1_1\nS^2_1\nS^1_2\nS^2_2\nS^3_2\n and so on.
+   * ZHUDATA_FILE_SIMPLE = Address to the file with all tokenized
+   simple sentences. Format: S^1_1\nS^2_1\nS^1_2\nS^2_2\nS^3_2\n and
+   so on.
 
-** BOXER_DATADIR: Directory address which contains the boxer output of
-   ZHUDATA_FILE_MAIN.
+   * BOXER_DATADIR: Directory address which contains the boxer output
+   of ZHUDATA_FILE_MAIN.
 
-** CHUNK_SIZE = Size of the boxer output chunks. The above scripts
+   * CHUNK_SIZE = Size of the boxer output chunks. The above scripts
    loads boxer xml file before parsing them, it is much faster to use
    chunks (let say of 10000) of ZHUDATA_FILE_MAIN.
 
-** boxer_main_filename = Boxer output file name pattern. For example:
+   * boxer_main_filename = Boxer output file name pattern. For
+   example:
    filename."+str(lower_index)+"-"+str(lower_index+CHUNK_SIZE)
         
 #### Test Data
@@ -84,10 +86,10 @@ If you use our code, please cite the following paper.
 * I will improve the interface of this script later. But for now you
   have to set following parameters: 
 
-** TEST_FILE_MAIN: Address to the file with all tokenized complex
+  * TEST_FILE_MAIN: Address to the file with all tokenized complex
    sentences. Format: C_1\nC_2\n and so on.
 
-** TEST_FILE_BOXER: Address to the boxer xml output file for
+  * TEST_FILE_BOXER: Address to the boxer xml output file for
    TEST_FILE_MAIN.
 
 ### Current Status
