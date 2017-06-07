@@ -32,7 +32,7 @@ If you use our code, please cite the following paper.
 
 ### Requirements
 
-* Boxer 1.00:  http://svn.ask.it.usyd.edu.au/trac/candc/wiki/boxer
+* Boxer 1.00:  http://svn.ask.it.usyd.edu.au/trac/candc/wiki/boxer, http://www.cl.cam.ac.uk/~sc609/candc-1.00.html
 * Moses: http://www.statmt.org/moses/?n=Development.GetStarted
 * Mgiza++:  http://www.statmt.org/moses/?n=Moses.ExternalTools#ntoc3
 * NLTK toolkit: http://www.nltk.org/
